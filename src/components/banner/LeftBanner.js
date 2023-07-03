@@ -4,21 +4,37 @@ import Media from './Media';
 
 const LeftBanner = () => {
     const [text] = useTypewriter({
-      words: ["Professional Coder.", "Full Stack Developer.", "UI Designer."],
+      words: ["Professional Coder", "Frontend Web Developer", "UI Designer", "React Developer"],
       loop: true,
-      typeSpeed: 20,
+      typeSpeed: 50,
       deleteSpeed: 10,
       delaySpeed: 2000,
     });
+
+    function handleIntroVideo(){
+      const introVideourl = 'https://drive.google.com/drive/u/0/folders/1DMPzess5bZ4Oe8sVJ56J8QH4fqVgtYVB';
+
+      window.open( introVideourl);
+    }
+
+    function handleResumepdf(){
+      const resumePdf = 'https://drive.google.com/file/d/12ThZ35LMx2AkqI8PhWrw3Q60yGEeW1_O/view?usp=sharing';
+
+      window.open( resumePdf);
+
+    }
+
+
+
   return (
     <div className="w-full lgl:w-1/2 flex flex-col gap-20">
       <div className="flex flex-col gap-5">
         <h4 className=" text-lg font-normal">WELCOME TO MY WORLD</h4>
         <h1 className="text-6xl font-bold text-white">
-          Hi, I'm <span className="text-designColor capitalize">John doe</span>
+          Hi, I'm<br/> <span className="text-designColor capitalize">Hrishikesh Shinde</span>
         </h1>
         <h2 className="text-4xl font-bold text-white">
-          a <span>{text}</span>
+           <span>{text}</span>
           <Cursor
             cursorBlinking="false"
             cursorStyle="|"
@@ -26,13 +42,13 @@ const LeftBanner = () => {
           />
         </h2>
         <p className="text-base font-bodyFont leading-6 tracking-wide">
-          I use animation as a third dimension by which to simplify experiences
-          and kuiding thro each and every interaction. I'm not adding motion
-          just to spruce things up, but doing it in ways that.
+        I enjoy creating delightful,human centered digital experiences & create effective front-end user interfaces.
         </p>
       </div>
      {/* Media */}
      <Media />
+     <span onClick={handleIntroVideo} className="cursor-pointer text-designColor"><b>INTRO-VIDEO &</b> <b onClick={handleResumepdf}>RESUME LINK</b></span>
+      
     </div>
   );
 }

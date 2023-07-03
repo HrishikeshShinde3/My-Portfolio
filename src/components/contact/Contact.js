@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import React, { useState, useRef } from 'react'
 import Title from '../layouts/Title';
 import ContactLeft from './ContactLeft';
-
+import emailjs from 'emailjs-com';
 const Contact = () => {
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -18,9 +18,22 @@ const Contact = () => {
       .match(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/);
   };
   // ========== Email Validation end here ================
+  const formef = useRef();
 
   const handleSend = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    // emailjs.sendForm('service_g9bjkbo', 'template_50ylqs9', ref.current, 'qOF0CZf1jQISppL8g')
+    emailjs.sendForm('service_g9bjkbo', 'template_50ylqs9', formef.current, 'qOF0CZf1jQISppL8g')
+
+      .then((result) => {
+        console.log(result.text);
+        setSuccessMsg(true)
+      }, (error) => {
+        console.log(error.text);
+        setSuccessMsg(false);
+      });
+
     if (username === "") {
       setErrMsg("Username is required!");
     } else if (phoneNumber === "") {
@@ -76,10 +89,9 @@ const Contact = () => {
                   <input
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
-                    className={`${
-                      errMsg === "Username is required!" &&
+                    className={`${errMsg === "Username is required!" &&
                       "outline-designColor"
-                    } contactInput`}
+                      } contactInput`}
                     type="text"
                   />
                 </div>
@@ -90,10 +102,9 @@ const Contact = () => {
                   <input
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     value={phoneNumber}
-                    className={`${
-                      errMsg === "Phone number is required!" &&
+                    className={`${errMsg === "Phone number is required!" &&
                       "outline-designColor"
-                    } contactInput`}
+                      } contactInput`}
                     type="text"
                   />
                 </div>
@@ -105,10 +116,9 @@ const Contact = () => {
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  className={`${
-                    errMsg === "Please give your Email!" &&
+                  className={`${errMsg === "Please give your Email!" &&
                     "outline-designColor"
-                  } contactInput`}
+                    } contactInput`}
                   type="email"
                 />
               </div>
@@ -119,10 +129,9 @@ const Contact = () => {
                 <input
                   onChange={(e) => setSubject(e.target.value)}
                   value={subject}
-                  className={`${
-                    errMsg === "Plese give your Subject!" &&
+                  className={`${errMsg === "Plese give your Subject!" &&
                     "outline-designColor"
-                  } contactInput`}
+                    } contactInput`}
                   type="text"
                 />
               </div>
@@ -133,9 +142,8 @@ const Contact = () => {
                 <textarea
                   onChange={(e) => setMessage(e.target.value)}
                   value={message}
-                  className={`${
-                    errMsg === "Message is required!" && "outline-designColor"
-                  } contactTextArea`}
+                  className={`${errMsg === "Message is required!" && "outline-designColor"
+                    } contactTextArea`}
                   cols="30"
                   rows="8"
                 ></textarea>
